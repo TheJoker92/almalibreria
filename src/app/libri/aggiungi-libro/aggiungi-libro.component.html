@@ -1,0 +1,22 @@
+<h3>AGGIUNGI LIBRO</h3>
+
+<div class="container-form">
+    <form [formGroup]="formBook">
+    
+        <label for="titolo">TITOLO: </label>
+        <input id="titolo" type="text" formControlName="titolo">
+      
+        <label for="trama">TRAMA: </label>
+        <input id="trama" type="text" formControlName="trama">
+    
+        <label for="pagine">PAGINE: </label>
+        <input id="pagine" type="text" formControlName="pagine">
+    
+        <label for="dataPubblicazione">DATA DI PUBBLICAZIONE: </label>
+        <input id="dataPubblicazione" type="text" formControlName="dataPubblicazione">
+      
+      </form>
+</div>
+<div class="action-button-container">
+    <button (click)="addBook()">AGGIUNGI</button>
+</div>

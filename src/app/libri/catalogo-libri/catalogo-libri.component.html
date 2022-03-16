@@ -1,0 +1,29 @@
+<h3>CATALOGO LIBRI</h3>
+<div *ngIf="isEmptyList;else bookListTemplate" class="container-catalogo-libri-empty-list">
+    Non è stato possibile recuperare la lista dei libri
+</div>
+
+<ng-template #bookListTemplate>
+    <table>
+        <div>
+            <tr>
+              <th>{{keys[0]}}</th>
+              <th>{{keys[1]}}</th>
+              <th>{{keys[2]}}</th>
+              <th>{{keys[4]}}</th>
+            </tr>
+            
+        </div>
+      </table>
+    <div *ngFor="let book of bookList">
+        <tr>
+            <td>{{book.titolo}}</td>
+            <td>{{book.trama}}</td>
+            <td>{{book.pagine}}</td>
+            <td>{{book.dataPubblicazione}}</td>
+            <td><button (click)="updateBook(book.id)">MODIFICA</button></td>
+            <td><button (click)="deleteBook(book.id)">ELIMINA</button></td>
+        </tr>
+        
+    </div>
+</ng-template>
