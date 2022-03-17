@@ -1,5 +1,5 @@
 <div class="topnav">
-  <a class="active" href="libri">libri</a>
-  <a href="autori">autori</a>
-  <a href="prestiti">prestiti</a>
+  <a [ngClass]="{active: tabGestiti['libri']}" href="libri" (click)="manangeActiveTab('libri')">libri</a>
+  <a [ngClass]="{active: tabGestiti['autori']}" href="autori" (click)="manangeActiveTab('autori')">autori</a>
+  <a [ngClass]="{active: tabGestiti['prestiti']}" href="prestiti" (click)="manangeActiveTab('prestiti')">prestiti</a>
 </div>

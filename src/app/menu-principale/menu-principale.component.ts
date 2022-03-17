@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPrincipaleComponent implements OnInit {
 
+  tabGestiti: any = {'libri': false, 'autori': false, 'prestiti': false}
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  manangeActiveTab(tabAttivo: string) {
+    for(let tab of Object.keys(this.tabGestiti)) {
+      this.tabGestiti[tab] = tab == tabAttivo
+    }
   }
 
 }
