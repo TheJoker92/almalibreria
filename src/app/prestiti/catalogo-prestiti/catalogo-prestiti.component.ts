@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { ILoan } from 'src/app/interfaces/ILoan';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 
@@ -22,37 +22,70 @@ export class CatalogoPrestitiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpSubscription = this.httpService.getLoanAuthor().subscribe({
-      next: (loanList: ILoan[]) => {
-        this.isEmptyList = false
-        
-        //adatta le righe per la visualizzazione FE
-        this.elementsAdapter(loanList)
-
-        //Prende i campi della tabella
-        this.keys = Object.keys(loanList[0]) 
-      },
-      error: (error: any) => {
-        this.isEmptyList = true
-
-        throw(error)
+    forkJoin(
+      // as of RxJS 6.5+ we can use a dictionary of sources
+      {
+        loan: this.httpService.getLoanAuthor(),
+        book: this.httpService.getBookAuthor(),
+        user: this.httpService.getUsers()
       }
-    })
+    )
+      // { google: object, microsoft: object, users: array }
+      .subscribe(
+        
+          next => {
+                this.isEmptyList = false
+                
+                //adatta le righe per la visualizzazione FE
+                this.elementsAdapter(next)
+        
+              },
+          error => console.log(error)
+      );
+
+    // this.httpSubscription = this.httpService.getLoanAuthor().subscribe({
+    //   next: (loanList: ILoan[]) => {
+    //     this.isEmptyList = false
+        
+    //     //adatta le righe per la visualizzazione FE
+    //     this.elementsAdapter(loanList)
+
+    //     //Prende i campi della tabella
+    //     this.keys = Object.keys(loanList[0]) 
+    //   },
+    //   error: (error: any) => {
+    //     this.isEmptyList = true
+
+    //     throw(error)
+    //   }
+    // })
   }
 
-  elementsAdapter(loanList: any[]) {
+  elementsAdapter(rawData: any) {
+    let rawLoanList = rawData["loan"]
+    let rawBookList = rawData["book"]
+    let rawUserList = rawData["user"]
     //Pulisco la lista prima di inserire i nuovi valori
     this.loanList = []
 
 
-    for (let loanRaw of loanList) {
+    for (let loanRaw of rawLoanList) {
       const datainizio = loanRaw["datainizio"].split("T")[0]
       const datafine = loanRaw["datafine"].split("T")[0]
 
+      //Recupera nome e cognome dell'utente conoscendo l'id_utente dalla fk di loan
+      let utenteTrovato
+      for(let rawUser of rawUserList){
+        if(rawUser.id_utente == loanRaw.fk_utente){
+          utenteTrovato=rawUser
+          break
+        }
+      }
+      //Recupera nome del libro conoscendo l'id_libro dalla fk di loan
 
       let loan: ILoan = {
         "id": loanRaw["id_prestito"],
-        "fullname": loanRaw["nome"] + " " + loanRaw["cognome"],
+        "fullname": utenteTrovato["nome"] + " " + utenteTrovato["cognome"],
         "titolo_libro": loanRaw["titolo"],
         "datainizio": datainizio,
         "datafine": datafine

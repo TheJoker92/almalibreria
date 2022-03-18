@@ -19,6 +19,11 @@ export class HttpServiceService {
   readonly ENDPOINT_ADD_LOAN_LIST = "/loan/createLoan"
   readonly ENDPOINT_DELETE_LOAN_LIST = "/loan/deleteLoan"
   readonly ENDPOINT_UPDATE_LOAN_LIST = "/loan/updateLoan"
+
+  readonly ENDPOINT_GET_USER_LIST = "/user/getList"
+  readonly ENDPOINT_ADD_USER_LIST = "/user/createUser"
+  readonly ENDPOINT_DELETE_USER_LIST = "/user/deleteUser"
+  readonly ENDPOINT_UPDATE_USER_LIST = "/user/updateUser"
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
@@ -61,6 +66,11 @@ export class HttpServiceService {
 
   deleteLoan(payload: any) {
     return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_BOOK_LIST}`, payload, this.httpOptions)
+  }
+
+  //CRUD USER
+  getUsers(){
+    return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_USER_LIST}`, this.httpOptions)
   }
 
 }
