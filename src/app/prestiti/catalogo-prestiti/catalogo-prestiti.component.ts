@@ -33,32 +33,19 @@ export class CatalogoPrestitiComponent implements OnInit {
       // { google: object, microsoft: object, users: array }
       .subscribe(
         
-          next => {
-                this.isEmptyList = false
-                
-                //adatta le righe per la visualizzazione FE
-                this.elementsAdapter(next)
-        
-              },
-          error => console.log(error)
+        next => {
+          this.isEmptyList = false
+          
+          //adatta le righe per la visualizzazione FE
+          this.elementsAdapter(next)
+  
+        },
+        error => {
+          this.isEmptyList = true
+  
+          throw(error)
+        }
       );
-
-    // this.httpSubscription = this.httpService.getLoanAuthor().subscribe({
-    //   next: (loanList: ILoan[]) => {
-    //     this.isEmptyList = false
-        
-    //     //adatta le righe per la visualizzazione FE
-    //     this.elementsAdapter(loanList)
-
-    //     //Prende i campi della tabella
-    //     this.keys = Object.keys(loanList[0]) 
-    //   },
-    //   error: (error: any) => {
-    //     this.isEmptyList = true
-
-    //     throw(error)
-    //   }
-    // })
   }
 
   elementsAdapter(rawData: any) {
@@ -74,19 +61,15 @@ export class CatalogoPrestitiComponent implements OnInit {
       const datafine = loanRaw["datafine"].split("T")[0]
 
       //Recupera nome e cognome dell'utente conoscendo l'id_utente dalla fk di loan
-      let utenteTrovato
-      for(let rawUser of rawUserList){
-        if(rawUser.id_utente == loanRaw.fk_utente){
-          utenteTrovato=rawUser
-          break
-        }
-      }
+      let filteredUser = rawUserList.find((rawUser: { id_utente: any; }) => rawUser.id_utente == loanRaw.fk_utente)
+       
       //Recupera nome del libro conoscendo l'id_libro dalla fk di loan
+      let filteredBook = rawBookList.find((rawBook: { id_libro: any; }) => rawBook.id_libro == loanRaw.fk_libro)
 
       let loan: ILoan = {
         "id": loanRaw["id_prestito"],
-        "fullname": utenteTrovato["nome"] + " " + utenteTrovato["cognome"],
-        "titolo_libro": loanRaw["titolo"],
+        "fullname": filteredUser["nome"] + " " + filteredUser["cognome"],
+        "titolo_libro": filteredBook["titolo"],
         "datainizio": datainizio,
         "datafine": datafine
       }
