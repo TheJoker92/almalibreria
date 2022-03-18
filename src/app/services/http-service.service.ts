@@ -7,11 +7,11 @@ import { IBook } from '../interfaces/IBook';
 })
 export class HttpServiceService {
 
-  readonly IP = "10.100.202.166"
+  readonly IP = "localhost"
   readonly PORT = "8081"
 
   readonly ENDPOINT_GET_BOOK_LIST = "/book/getList"
-  readonly ENDPOINT_ADD_BOOK_LIST = "/book/addBook"
+  readonly ENDPOINT_ADD_BOOK_LIST = "/book/createBook"
   readonly ENDPOINT_DELETE_BOOK_LIST = "/book/deleteBook"
   readonly ENDPOINT_UPDATE_BOOK_LIST = "/book/updateBook"
   
@@ -26,8 +26,8 @@ export class HttpServiceService {
     return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_BOOK_LIST}`, this.httpOptions)
   }
 
-  addBook(book: IBook) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_BOOK_LIST}`, this.httpOptions)
+  addBook(book: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_BOOK_LIST}`,book, this.httpOptions)
   }
 
   updateBook(id: number) {

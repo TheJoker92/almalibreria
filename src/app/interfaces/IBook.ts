@@ -3,5 +3,5 @@ export interface IBook {
     titolo: string
     trama: string
     pagine: number
-    dataPubblicazione: string
+    datapubblicazione: string
 }

@@ -7,10 +7,10 @@
     <table>
         <div>
             <tr>
-              <th>{{keys[0]}}</th>
-              <th>{{keys[1]}}</th>
-              <th>{{keys[2]}}</th>
-              <th>{{keys[4]}}</th>
+              <th>titolo</th>
+              <th>trama</th>
+              <th>pagine</th>
+              <th>datapubblicazione</th>
             </tr>
             
         </div>
@@ -20,7 +20,7 @@
             <td>{{book.titolo}}</td>
             <td>{{book.trama}}</td>
             <td>{{book.pagine}}</td>
-            <td>{{book.dataPubblicazione}}</td>
+            <td>{{book.datapubblicazione}}</td>
             <td><button (click)="updateBook(book.id)">MODIFICA</button></td>
             <td><button (click)="deleteBook(book.id)">ELIMINA</button></td>
         </tr>

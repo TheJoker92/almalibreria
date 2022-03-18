@@ -46,7 +46,7 @@ export class CatalogoLibriComponent implements OnInit {
 
 
     for (let bookRaw of bookList) {
-      const dataPubblicazione = bookRaw["dataPubblicazione"].split("T")[0]
+      const datapubblicazione = bookRaw["datapubblicazione"].split("T")[0]
 
 
       let book: IBook = {
@@ -54,7 +54,7 @@ export class CatalogoLibriComponent implements OnInit {
         "titolo": bookRaw["titolo"],
         "trama": bookRaw["trama"],
         "pagine": bookRaw["pagine"],
-        "dataPubblicazione": dataPubblicazione
+        "datapubblicazione": datapubblicazione
       }
 
       this.bookList.push(book)
@@ -96,5 +96,6 @@ export class CatalogoLibriComponent implements OnInit {
       }
     })
   }
+  
 
 }

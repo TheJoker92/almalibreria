@@ -14,7 +14,7 @@ export class AggiungiLibroComponent implements OnInit {
     titolo: new FormControl(''),
     trama: new FormControl(''),
     pagine: new FormControl(''),
-    dataPubblicazione: new FormControl(''),
+    datapubblicazione: new FormControl(''),
   });
 
   constructor(private httpService: HttpServiceService) { }
@@ -22,8 +22,11 @@ export class AggiungiLibroComponent implements OnInit {
   ngOnInit(): void {}
 
   addBook() {
-    this.httpService.addBook(this.formBook.value).subscribe({
+    let payLoad=this.buildPayLoad()
+    console.log(payLoad)
+    this.httpService.addBook(payLoad).subscribe({
       next: () => {
+        
         window.alert("Libro aggiunto correttamente")
 
         location.reload()
@@ -33,6 +36,20 @@ export class AggiungiLibroComponent implements OnInit {
       }
     })
 
+
   }
+
+  
+  buildPayLoad() {
+    let payLoad = {
+      titolo: this.formBook.value.titolo,
+      trama: this.formBook.value.trama,
+      pagine: this.formBook.value.pagine,
+      datapubblicazione: new Date( this.formBook.value.datapubblicazione)
+    }
+    return payLoad
+
+  }
+
 
 }
