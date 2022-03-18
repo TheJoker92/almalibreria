@@ -48,15 +48,15 @@ export class HttpServiceService {
 
   //CRUD LOAN
   getLoanAuthor() {
-    return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_BOOK_LIST}`, this.httpOptions)
+    return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_LOAN_LIST}`, this.httpOptions)
   }
 
   addLoan(loan: any) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_BOOK_LIST}`, loan, this.httpOptions)
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_LOAN_LIST}`, loan, this.httpOptions)
   }
 
   updateLoan(payload: any) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_BOOK_LIST}`, payload , this.httpOptions)
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_LOAN_LIST}`, payload , this.httpOptions)
   }
 
   deleteLoan(payload: any) {
