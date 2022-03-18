@@ -68,7 +68,7 @@ export class AggiungiPrestitoComponent implements OnInit {
   buildPayLoad() {
     let payLoad = {
       fk_utente: this.id_user,
-      fk_libro: this.formLoan.value.book.id_libro,
+      fk_libro: this.formLoan.value.book.id,
       datainizio: new Date( this.formLoan.value.datainizio),
       datafine: new Date( this.formLoan.value.datafine)
     }
