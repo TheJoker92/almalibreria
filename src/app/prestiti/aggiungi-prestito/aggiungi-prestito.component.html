@@ -1,1 +1,26 @@
-<p>aggiungi-prestito works!</p>
+<h3>AGGIUNGI PRESTITO</h3>
+
+<div class="container-form">
+    <form [formGroup]="formLoan">
+    
+
+        <label for="trama">TITOLO: </label>
+        <select formControlName="book">
+            <option *ngIf="bookList.length == 0" [ngValue]="null" disabled>Nessun libro trovato</option>
+            <option *ngFor="let book of bookList" [ngValue]="book">
+             {{ book.titolo }}
+            </option>
+          </select> 
+          
+          <label for="trama">DATA INIZIO: </label>
+          <input type="date" formControlName="datainizio" value="">
+
+          <label for="trama">DATA FINE: </label>
+          <input type="date" formControlName="datafine" value="">
+          
+      
+      </form>
+</div>
+<div class="action-button-container">
+    <button (click)="addLoan()">AGGIUNGI</button>
+</div>

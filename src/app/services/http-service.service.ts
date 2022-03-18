@@ -55,12 +55,12 @@ export class HttpServiceService {
     return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_BOOK_LIST}`, loan, this.httpOptions)
   }
 
-  updateLoan(id: number) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_BOOK_LIST}`, this.httpOptions)
+  updateLoan(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_BOOK_LIST}`, payload , this.httpOptions)
   }
 
-  deleteLoan(id: number) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_BOOK_LIST}`, this.httpOptions)
+  deleteLoan(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_BOOK_LIST}`, payload, this.httpOptions)
   }
 
 }

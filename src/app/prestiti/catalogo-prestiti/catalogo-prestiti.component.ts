@@ -51,7 +51,7 @@ export class CatalogoPrestitiComponent implements OnInit {
 
 
       let loan: ILoan = {
-        "id": loanRaw["id"],
+        "id": loanRaw["id_prestito"],
         "fullname": loanRaw["nome"] + " " + loanRaw["cognome"],
         "titolo_libro": loanRaw["titolo"],
         "datainizio": datainizio,
@@ -67,14 +67,17 @@ export class CatalogoPrestitiComponent implements OnInit {
   }
 
   updateLoan(id: number) {
-    this.httpService.updateLoan(id).subscribe({
+
+    let payload = {"id_prestito": id}
+
+    this.httpService.updateLoan(payload).subscribe({
       next: (response: any) =>  {
-        window.alert("Il libro è stato modificato")
+        window.alert("Il prestito è stato modificato")
 
         location.reload()
       },
       error: (error: any) => {
-        window.alert("ERRORE NEL MODIFICARE IL LIBRO")
+        window.alert("ERRORE NEL MODIFICARE IL PRESTITO")
 
 
         throw(error)
@@ -83,7 +86,9 @@ export class CatalogoPrestitiComponent implements OnInit {
   }
 
   deleteLoan(id: number) {
-    this.httpService.updateLoan(id).subscribe({
+    let payload = {"id_prestito": id}
+
+    this.httpService.updateLoan(payload).subscribe({
       next: (response: any) =>  {
         window.alert("Il libro è stato eliminato")
 
