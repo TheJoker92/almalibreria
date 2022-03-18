@@ -1,1 +1,29 @@
-<p>catalogo-prestiti works!</p>
+<h3>CATALOGO PRESTITI</h3>
+<div *ngIf="isEmptyList;else listTemplate" class="container-catalogue-empty-list">
+    Non è stato possibile recuperare la lista dei prestiti
+</div>
+
+<ng-template #listTemplate>
+    <table>
+        <div>
+            <tr>
+              <th>Nome utente</th>
+              <th>libro</th>
+              <th>Da</th>
+              <th>a</th>
+            </tr>
+            
+        </div>
+      </table>
+    <div *ngFor="let loan of loanList">
+        <tr>
+            <td>{{loan.fullname}}</td>
+            <td>{{loan.titolo_libro}}</td>
+            <td>{{loan.datainizio}}</td>
+            <td>{{loan.datafine}}</td>
+            <td><button (click)="updateLoan(loan.id)">MODIFICA</button></td>
+            <td><button (click)="deleteLoan(loan.id)">ELIMINA</button></td>
+        </tr>
+        
+    </div>
+</ng-template>
