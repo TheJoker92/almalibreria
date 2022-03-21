@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBook } from '../../interfaces/IBook';
 import { HttpServiceService } from '../../services/http-service.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-catalogo-libri',
@@ -17,27 +19,38 @@ export class CatalogoLibriComponent implements OnInit {
 
   keys: string[] = []
 
-  constructor(private httpService: HttpServiceService) {
+  constructor(private httpService: HttpServiceService,
+              private confirmDeleteDialogService: ConfirmationService) {
 
   }
 
   ngOnInit() {
-    this.httpSubscription = this.httpService.getBookAuthor().subscribe({
-      next: (bookList: IBook[]) => {
-        this.isEmptyList = false
-        
-        //adatta le righe per la visualizzazione FE
-        this.elementsAdapter(bookList)
+    this.isEmptyList = false
+    let bookList: any[] = [{
+      id: 1,
+      titolo: "titolo1",
+      trama: "bla  bla",
+      pagine: 110,
+      datapubblicazione: "2021-11-10"
+    }]
+    this.elementsAdapter(bookList)
 
-        //Prende i campi della tabella
-        this.keys = Object.keys(bookList[0]) 
-      },
-      error: (error: any) => {
-        this.isEmptyList = true
+    // this.httpSubscription = this.httpService.getBookAuthor().subscribe({
+    //   next: (bookList: IBook[]) => {
+    //     this.isEmptyList = false
 
-        throw(error)
-      }
-    })
+    //     //adatta le righe per la visualizzazione FE
+    //     this.elementsAdapter(bookList)
+
+    //     //Prende i campi della tabella
+    //     this.keys = Object.keys(bookList[0]) 
+    //   },
+    //   error: (error: any) => {
+    //     this.isEmptyList = true
+
+    //     throw(error)
+    //   }
+    // })
   }
 
   elementsAdapter(bookList: IBook[]) {
@@ -67,7 +80,7 @@ export class CatalogoLibriComponent implements OnInit {
 
   updateBook(id: number) {
     this.httpService.updateBook(id).subscribe({
-      next: (response: any) =>  {
+      next: (response: any) => {
         window.alert("Il libro è stato modificato")
 
         location.reload()
@@ -76,14 +89,24 @@ export class CatalogoLibriComponent implements OnInit {
         window.alert("ERRORE NEL MODIFICARE IL LIBRO")
 
 
-        throw(error)
+        throw (error)
       }
+    })
+  }
+
+  openDeleteDialog(book: IBook) {
+    this.confirmDeleteDialogService.confirm({
+      message: `Sei sicuro di voler eliminare il libro <strong>${book.titolo}</strong> ?`,
+      accept: () => {
+        this.deleteBook(book.id)
+      }
+
     })
   }
 
   deleteBook(id: number) {
     this.httpService.updateBook(id).subscribe({
-      next: (response: any) =>  {
+      next: (response: any) => {
         window.alert("Il libro è stato eliminato")
 
         location.reload()
@@ -92,10 +115,10 @@ export class CatalogoLibriComponent implements OnInit {
         window.alert("ERRORE NELL' ELIMINARE IL LIBRO")
 
 
-        throw(error)
+        throw (error)
       }
     })
   }
-  
+
 
 }

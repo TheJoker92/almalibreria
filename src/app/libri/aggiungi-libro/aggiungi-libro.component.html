@@ -1,22 +1,27 @@
-<h3>AGGIUNGI LIBRO</h3>
 
-<div class="container-form">
-    <form [formGroup]="formBook">
-    
-        <label for="titolo">TITOLO: </label>
-        <input id="titolo" type="text" formControlName="titolo">
-      
-        <label for="trama">TRAMA: </label>
-        <input id="trama" type="text" formControlName="trama">
-    
-        <label for="pagine">PAGINE: </label>
-        <input id="pagine" type="number" formControlName="pagine">
-    
-        <label for="datapubblicazione">DATA DI PUBBLICAZIONE: </label>
-        <input type="date" formControlName="datapubblicazione" value="">
-      
-      </form>
-</div>
+
 <div class="action-button-container">
-    <button (click)="addBook()">AGGIUNGI</button>
+    <p-dialog position="top-right" header="Aggiungi libro" [(visible)]="display" [closable]="false">
+        <div class="container-form">
+            <form [formGroup]="formBook">
+                <label for="float-input">TITOLO</label>
+                <input id="titolo" type="text" formControlName="titolo" pInputText>
+            
+                <label for="trama">TRAMA: </label>
+                <input id="trama" type="text" formControlName="trama" pInputText>
+            
+                <label for="pagine">PAGINE: </label>
+                <input id="pagine" type="number" formControlName="pagine" pInputText>
+            
+                <label for="datapubblicazione">DATA DI PUBBLICAZIONE: </label>
+                <input type="date" formControlName="datapubblicazione" value="" pInputText>
+            </form>
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton  type="button" label="ANNULLA" class="p-button-text p-button-danger" (click)="closeDialog()"></button>
+            <button pButton type="button" label="CONFERMA" icon="pi pi-check" iconPos="left" (click)="addBook()"></button>
+
+        </ng-template>
+    </p-dialog>
+    <button pButton  type="button" [icon]="'pi pi-plus'" label="AGGIUNGI" class="p-button-text" (click)="openDialog()"></button>
 </div>

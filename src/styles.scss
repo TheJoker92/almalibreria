@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    overflow-x: hidden;
+}
+
+p-table .pi-trash {
+    color: red;
+}
+
+p-table .pi-pencil {
+    color: blue;
+}
+
+.header-table-container {
+    margin-left:50px;
+    margin-right:50px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-button-table {
+    display: flex;
+    align-items: flex-end;
+}
+
+app-aggiungi-libro p-dialog .p-dialog-top-right {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    .p-element:first-child {
+        width: 40%;
+    }
+    form {
+        width: 80%;
+    }
+}
+
+app-aggiungi-libro p-element {
+    width:40%
+}

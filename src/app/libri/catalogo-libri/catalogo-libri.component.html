@@ -1,29 +1,59 @@
-<h3>CATALOGO LIBRI</h3>
+<div class="header-table-container">
+    <div>
+        <h3>CATALOGO LIBRI</h3>
+    </div>
+    <div class="add-button-table">
+        <app-aggiungi-libro></app-aggiungi-libro>
+    </div>
+</div>
+
 <div *ngIf="isEmptyList;else bookListTemplate" class="container-catalogue-empty-list">
     Non è stato possibile recuperare la lista dei libri
 </div>
 
 <ng-template #bookListTemplate>
-    <table>
-        <div>
+    <p-table [value]="bookList" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
             <tr>
-              <th>titolo</th>
-              <th>trama</th>
-              <th>pagine</th>
-              <th>datapubblicazione</th>
+                <th>titolo</th>
+                <th>trama</th>
+                <th>pagine</th>
+                <th>datapubblicazione</th>
+                <th></th>
+                <th></th>
             </tr>
-            
-        </div>
-      </table>
-    <div *ngFor="let book of bookList">
-        <tr>
-            <td>{{book.titolo}}</td>
-            <td>{{book.trama}}</td>
-            <td>{{book.pagine}}</td>
-            <td>{{book.datapubblicazione}}</td>
-            <td><button (click)="updateBook(book.id)">MODIFICA</button></td>
-            <td><button (click)="deleteBook(book.id)">ELIMINA</button></td>
-        </tr>
-        
-    </div>
+        </ng-template>
+        <ng-template pTemplate="body" let-book>
+            <tr>
+                <td>{{book.titolo}}</td>
+                <td>{{book.trama}}</td>
+                <td>{{book.pagine}}</td>
+                <td>{{book.datapubblicazione}}</td>
+                <td>
+                    <button type="button"
+                            pButton pRipple 
+                            class="p-button-text p-button-rounded p-button-plain mr-2" 
+                            (click)="updateBook(book.id)" 
+                            [icon]="'pi pi-pencil'">
+                    </button>
+                </td>
+                <td>
+                    <button type="button"
+                            pButton pRipple 
+                            class="p-button-text p-button-rounded p-button-plain mr-2" 
+                            (click)="openDeleteDialog(book)" 
+                            [icon]="'pi pi-trash'">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog #cd header="Elimina libro" icon="pi pi-exclamation-triangle">
+        <ng-template pTemplate="footer">
+            <button pButton  type="button" label="ANNULLA" class="p-button-text p-button-danger" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="CONFERMA" (click)="cd.accept()"></button>
+        </ng-template>
+    </p-confirmDialog>
+
 </ng-template>

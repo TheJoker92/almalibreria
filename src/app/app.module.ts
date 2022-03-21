@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,12 @@ import { CatalogoPrestitiComponent } from './prestiti/catalogo-prestiti/catalogo
 import { AggiungiPrestitoComponent } from './prestiti/aggiungi-prestito/aggiungi-prestito.component';
 import { CatalogoAutoriComponent } from './autori/catalogo-autori/catalogo-autori.component';
 import { AggiungiAutoreComponent } from './autori/aggiungi-autore/aggiungi-autore.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -34,11 +40,20 @@ import { AggiungiAutoreComponent } from './autori/aggiungi-autore/aggiungi-autor
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TableModule,
+    ButtonModule,
+    ConfirmDialogModule,
+    DialogModule,
+    InputTextModule
   ],
-  providers: [HttpServiceService],
+  providers: [
+    HttpServiceService,
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
