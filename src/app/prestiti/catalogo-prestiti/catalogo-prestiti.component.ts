@@ -25,8 +25,8 @@ export class CatalogoPrestitiComponent implements OnInit {
     forkJoin(
       // as of RxJS 6.5+ we can use a dictionary of sources
       {
-        loan: this.httpService.getLoanAuthor(),
-        book: this.httpService.getBookAuthor(),
+        loan: this.httpService.getLoans(),
+        book: this.httpService.getBooks(),
         user: this.httpService.getUsers()
       }
     )

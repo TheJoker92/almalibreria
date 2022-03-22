@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBook } from '../../interfaces/IBook';
 import { HttpServiceService } from '../../services/http-service.service';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-catalogo-libri',
@@ -20,7 +20,8 @@ export class CatalogoLibriComponent implements OnInit {
   keys: string[] = []
 
   constructor(private httpService: HttpServiceService,
-              private confirmDeleteDialogService: ConfirmationService) {
+              private confirmDeleteDialogService: ConfirmationService,
+              private loaderService: LoaderService) {
 
   }
 
@@ -35,22 +36,26 @@ export class CatalogoLibriComponent implements OnInit {
     }]
     this.elementsAdapter(bookList)
 
-    // this.httpSubscription = this.httpService.getBookAuthor().subscribe({
-    //   next: (bookList: IBook[]) => {
-    //     this.isEmptyList = false
+    this.loaderService.display = true
+    this.httpSubscription = this.httpService.getBooks().subscribe({
+      next: (bookList: IBook[]) => {
+        this.loaderService.display = false
+        this.isEmptyList = false
 
-    //     //adatta le righe per la visualizzazione FE
-    //     this.elementsAdapter(bookList)
+        //adatta le righe per la visualizzazione FE
+        this.elementsAdapter(bookList)
 
-    //     //Prende i campi della tabella
-    //     this.keys = Object.keys(bookList[0]) 
-    //   },
-    //   error: (error: any) => {
-    //     this.isEmptyList = true
+        //Prende i campi della tabella
+        this.keys = Object.keys(bookList[0]) 
+        
+      },
+      error: (error: any) => {
+        this.isEmptyList = true
+        this.loaderService.display = false
 
-    //     throw(error)
-    //   }
-    // })
+        throw(error)
+      }
+    })
   }
 
   elementsAdapter(bookList: IBook[]) {

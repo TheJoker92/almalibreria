@@ -1,1 +1,58 @@
-<p>catalogo-autori works!</p>
+<div class="header-table-container">
+    <div>
+        <h3>CATALOGO AUTORI</h3>
+    </div>
+    <div class="add-button-table">
+        <app-aggiungi-autore></app-aggiungi-autore>
+    </div>
+</div>
+
+<div *ngIf="isEmptyList;else authorListTemplate" class="container-catalogue-empty-list">
+    Non è stato possibile recuperare la lista dei libri
+</div>
+
+<ng-template #authorListTemplate>
+    <p-table [value]="authorList" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>titolo</th>
+                <th>trama</th>
+                <th>pagine</th>
+                <th>datapubblicazione</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-author>
+            <tr>
+                <td>{{author.nome}}</td>
+                <td>{{author.cognome}}</td>
+                <td>{{author.descrizione}}</td>
+                <td>
+                    <button type="button"
+                            pButton pRipple 
+                            class="p-button-text p-button-rounded p-button-plain mr-2" 
+                            (click)="updateAuthor(author.id)" 
+                            [icon]="'pi pi-pencil'">
+                    </button>
+                </td>
+                <td>
+                    <button type="button"
+                            pButton pRipple 
+                            class="p-button-text p-button-rounded p-button-plain mr-2" 
+                            (click)="openDeleteDialog(author)" 
+                            [icon]="'pi pi-trash'">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-confirmDialog #cd header="Elimina autore" icon="pi pi-exclamation-triangle">
+        <ng-template pTemplate="footer">
+            <button pButton  type="button" label="ANNULLA" class="p-button-text p-button-danger" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="CONFERMA" (click)="cd.accept()"></button>
+        </ng-template>
+    </p-confirmDialog>
+
+</ng-template>

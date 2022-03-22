@@ -24,7 +24,9 @@ p-table .pi-pencil {
     align-items: flex-end;
 }
 
-app-aggiungi-libro p-dialog .p-dialog-top-right {
+app-aggiungi-libro p-dialog .p-dialog-top-right,
+app-aggiungi-autore p-dialog .p-dialog-top-right,
+app-aggiungi-prestito p-dialog .p-dialog-top-right {
     display: flex;
     align-items: center;
     margin-top: 15px;
@@ -36,6 +38,58 @@ app-aggiungi-libro p-dialog .p-dialog-top-right {
     }
 }
 
-app-aggiungi-libro p-element {
-    width:40%
+app-aggiungi-libro p-element,
+app-aggiungi-autore p-elemen,
+app-aggiungi-prestito p-elemen {
+    width:40%;
 }
+
+
+
+#loader div {
+    background-color: transparent;
+    border-width: 0px;
+}
+
+.container-catalogue-empty-list {
+    font-size: 24px;
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 600px;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 8px;
+    width: 150px;
+    min-width: 150px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .container-form {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.action-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px; 
+}
+
+  

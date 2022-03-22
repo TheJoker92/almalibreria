@@ -23,6 +23,8 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './services/loader.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { InputTextModule } from 'primeng/inputtext';
     AggiungiPrestitoComponent,
     CatalogoAutoriComponent,
     AggiungiAutoreComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { InputTextModule } from 'primeng/inputtext';
   ],
   providers: [
     HttpServiceService,
-    ConfirmationService
+    ConfirmationService,
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })

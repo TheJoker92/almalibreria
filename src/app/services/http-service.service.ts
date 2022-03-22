@@ -24,6 +24,11 @@ export class HttpServiceService {
   readonly ENDPOINT_ADD_USER_LIST = "/user/createUser"
   readonly ENDPOINT_DELETE_USER_LIST = "/user/deleteUser"
   readonly ENDPOINT_UPDATE_USER_LIST = "/user/updateUser"
+
+  readonly ENDPOINT_GET_AUTHOR_LIST = "/author/getList"
+  readonly ENDPOINT_ADD_AUTHOR_LIST = "/author/createAuthor"
+  readonly ENDPOINT_DELETE_AUTHOR_LIST = "/author/deleteAuthor"
+  readonly ENDPOINT_UPDATE_AUTHOR_LIST = "/author/updateAuthor"
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
@@ -34,7 +39,7 @@ export class HttpServiceService {
   
   //CRUD BOOK
 
-  getBookAuthor() {
+  getBooks() {
     return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_BOOK_LIST}`, this.httpOptions)
   }
 
@@ -52,12 +57,12 @@ export class HttpServiceService {
 
 
   //CRUD LOAN
-  getLoanAuthor() {
+  getLoans() {
     return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_LOAN_LIST}`, this.httpOptions)
   }
 
-  addLoan(loan: any) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_LOAN_LIST}`, loan, this.httpOptions)
+  addLoan(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_LOAN_LIST}`, payload, this.httpOptions)
   }
 
   updateLoan(payload: any) {
@@ -65,12 +70,41 @@ export class HttpServiceService {
   }
 
   deleteLoan(payload: any) {
-    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_BOOK_LIST}`, payload, this.httpOptions)
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_LOAN_LIST}`, payload, this.httpOptions)
   }
 
   //CRUD USER
   getUsers(){
     return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_USER_LIST}`, this.httpOptions)
+  }
+
+  addUser(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_USER_LIST}`, payload, this.httpOptions)
+  }
+
+  updateUser(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_USER_LIST}`, payload , this.httpOptions)
+  }
+
+  deleteUser(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_USER_LIST}`, payload, this.httpOptions)
+  }
+
+  //CRUD AUTHOR
+  getAuthors() {
+    return this.http.get<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_GET_AUTHOR_LIST}`, this.httpOptions)
+  }
+
+  addAuthor(loan: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_ADD_AUTHOR_LIST}`, loan, this.httpOptions)
+  }
+
+  updateAuthor(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_UPDATE_AUTHOR_LIST}`, payload , this.httpOptions)
+  }
+
+  deleteAuthorn(payload: any) {
+    return this.http.post<any>(`http://${this.IP}:${this.PORT}${this.ENDPOINT_DELETE_AUTHOR_LIST}`, payload, this.httpOptions)
   }
 
 }

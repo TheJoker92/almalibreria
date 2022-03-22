@@ -25,7 +25,7 @@ export class AggiungiPrestitoComponent implements OnInit {
   constructor(private httpService: HttpServiceService) { }
 
   ngOnInit(): void {
-    this.$bookList = this.httpService.getBookAuthor().subscribe({
+    this.$bookList = this.httpService.getBooks().subscribe({
       next: (bookList: any[]) => {
         
         //adatta le righe per la visualizzazione FE

@@ -1,1 +1,24 @@
-<p>aggiungi-autore works!</p>
+
+
+<div class="action-button-container">
+    <p-dialog position="top-right" header="Aggiungi autore" [(visible)]="displayAddAuthorModal" [closable]="false">
+        <div class="container-form">
+            <form [formGroup]="formAuthor">
+                <label for="float-input">NOME</label>
+                <input id="nome" type="text" formControlName="nome" pInputText>
+            
+                <label for="cognome">COGNOME: </label>
+                <input id="cognome" type="text" formControlName="cognome" pInputText>
+            
+                <label for="descrizione">DESCRIZIONE: </label>
+                <input id="descrizione" type="number" formControlName="descrizione" pInputText>
+            </form>
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton  type="button" label="ANNULLA" class="p-button-text p-button-danger" (click)="closeDialog()"></button>
+            <button pButton type="button" label="CONFERMA" icon="pi pi-check" iconPos="left" (click)="addAuthor()"></button>
+
+        </ng-template>
+    </p-dialog>
+    <button pButton  type="button" [icon]="'pi pi-plus'" label="AGGIUNGI" class="p-button-text" (click)="openDialog()"></button>
+</div>

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ConfirmationService } from 'primeng/api';
 import { HttpServiceService } from 'src/app/services/http-service.service';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 @Component({
@@ -19,20 +17,21 @@ export class AggiungiLibroComponent implements OnInit {
     datapubblicazione: new FormControl(''),
   });
 
-  display = false
+  displayAddBookModal = false
 
   constructor(private httpService: HttpServiceService,
-              private confirmDeleteDialogService: ConfirmationService,
-              private dialogModule: DialogModule) { }
+              public loaderService: LoaderService) { }
 
   ngOnInit(): void {}
 
   closeDialog() {
-    this.display = false
+    this.displayAddBookModal = false
   }
 
   addBook() {
     let payLoad=this.buildPayLoad()
+
+    this.loaderService.display = true
 
     this.httpService.addBook(payLoad).subscribe({
       next: () => {
@@ -41,10 +40,13 @@ export class AggiungiLibroComponent implements OnInit {
 
         location.reload()
 
-        this.display = false
+        this.displayAddBookModal = false
+        this.loaderService.display = false
       },
       error: () => {
         window.alert("Errore nell'aggiunta libro")
+
+        this.loaderService.display = false
       }
     })
 
@@ -64,7 +66,7 @@ export class AggiungiLibroComponent implements OnInit {
   }
 
   openDialog() {
-    this.display = true
+    this.displayAddBookModal = true
   }
 
 
