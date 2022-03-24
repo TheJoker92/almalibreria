@@ -1,5 +1,13 @@
-<div class="topnav">
-  <a [ngClass]="{active: tabGestiti['libri']}" href="libri" (click)="manangeActiveTab('libri')">libri</a>
-  <a [ngClass]="{active: tabGestiti['autori']}" href="autori" (click)="manangeActiveTab('autori')">autori</a>
-  <a [ngClass]="{active: tabGestiti['prestiti']}" href="prestiti" (click)="manangeActiveTab('prestiti')">prestiti</a>
+<div class="topnav justify">
+  <div>
+    <a [ngClass]="{active: tabGestiti['libri']}" href="libri" (click)="manangeActiveTab('libri')">libri</a>
+    <a [ngClass]="{active: tabGestiti['autori']}" href="autori" (click)="manangeActiveTab('autori')">autori</a>
+    <a [ngClass]="{active: tabGestiti['prestiti']}" href="prestiti" (click)="manangeActiveTab('prestiti')">prestiti</a>
+  </div>
+  <div *ngIf="!userService.user" ;else logged  class="mr-30px">
+    <a href="">ACCEDI</a>
+  </div>
+  <div *ngIf="userService.user" ;else logged  class="mr-30px">
+    <a href="">{{ userService.getUsername() }}</a>
+  </div>
 </div>

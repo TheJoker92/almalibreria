@@ -56,6 +56,7 @@ export class AggiungiLibroComponent implements OnInit {
   
   buildPayLoad() {
     let payLoad = {
+      id_libro: 1,
       titolo: this.formBook.value.titolo,
       trama: this.formBook.value.trama,
       pagine: this.formBook.value.pagine,

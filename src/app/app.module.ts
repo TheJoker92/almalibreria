@@ -25,6 +25,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './services/loader.service';
+import { LoginComponent } from './login/login.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { LoaderService } from './services/loader.service';
     CatalogoAutoriComponent,
     AggiungiAutoreComponent,
     LoaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { LoaderService } from './services/loader.service';
   providers: [
     HttpServiceService,
     ConfirmationService,
-    LoaderService
+    LoaderService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

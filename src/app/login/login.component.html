@@ -1,0 +1,12 @@
+
+
+<div class="login-container">
+    <form [formGroup]="form">
+        <label for="float-input">UTENTE</label>
+        <input id="titolo" type="text" formControlName="username" pInputText ngClass="{'invalid-field':form.controls.username.invalid}">
+    
+        <label for="trama">PASSWORD</label>
+        <input id="trama" type="text" formControlName="password" pInputText>
+    </form>
+    <button pButton type="button" label="ACCEDI" iconPos="left" (click)="login()"></button>
+</div>

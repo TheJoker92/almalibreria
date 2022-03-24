@@ -26,16 +26,6 @@ export class CatalogoLibriComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isEmptyList = false
-    let bookList: any[] = [{
-      id: 1,
-      titolo: "titolo1",
-      trama: "bla  bla",
-      pagine: 110,
-      datapubblicazione: "2021-11-10"
-    }]
-    this.elementsAdapter(bookList)
-
     this.loaderService.display = true
     this.httpSubscription = this.httpService.getBooks().subscribe({
       next: (bookList: IBook[]) => {
@@ -68,7 +58,7 @@ export class CatalogoLibriComponent implements OnInit {
 
 
       let book: IBook = {
-        "id": bookRaw["id"],
+        "id_libro": bookRaw["id_libro"],
         "titolo": bookRaw["titolo"],
         "trama": bookRaw["trama"],
         "pagine": bookRaw["pagine"],
@@ -103,14 +93,15 @@ export class CatalogoLibriComponent implements OnInit {
     this.confirmDeleteDialogService.confirm({
       message: `Sei sicuro di voler eliminare il libro <strong>${book.titolo}</strong> ?`,
       accept: () => {
-        this.deleteBook(book.id)
+        this.deleteBook(book)
       }
 
     })
   }
 
-  deleteBook(id: number) {
-    this.httpService.updateBook(id).subscribe({
+  deleteBook(book: IBook) {
+    let payload = book
+    this.httpService.deleteBook(payload).subscribe({
       next: (response: any) => {
         window.alert("Il libro è stato eliminato")
 
